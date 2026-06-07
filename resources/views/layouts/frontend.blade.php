@@ -128,6 +128,88 @@
             background: #ffd700;
             margin: 15px auto 0;
         }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .about-content {
+            padding-left: 30px;
+        }
+
+        .about-content .section-title {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .about-content .lead {
+            color: #c9a03d;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .about-stats:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-stats h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a2a4f;
+            margin: 10px 0 5px;
+        }
+
+        .about-stats p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn-gold-about {
+            background: linear-gradient(135deg, #c9a03d 0%, #e0b554 100%);
+            border: none;
+            color: #1a2a4f;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold-about:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201,160,61,0.4);
+            color: #1a2a4f;
+        }
+
+        .text-gold {
+            color: #c9a03d !important;
+        }
         
         /* Facilities */
         .facilities-section {

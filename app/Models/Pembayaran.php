@@ -17,7 +17,8 @@ class Pembayaran extends Model  // ← Huruf besar P
         'jumlah_pembayaran',
         'bukti_pembayaran',
         'tanggal_pembayaran',
-        'status'
+        'status',
+        'alasan_penolakan'
     ];
     
     // Relasi ke Reservasi (WAJIB)

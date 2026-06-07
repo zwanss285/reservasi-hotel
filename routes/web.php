@@ -30,21 +30,20 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
         Route::get('/{id}', [User\ReservasiController::class, 'show'])->name('show');
         Route::delete('/{id}', [User\ReservasiController::class, 'cancel'])->name('cancel');
     });
+    
+    Route::prefix('pembayaran')->name('pembayaran.')->group(function () {
+        Route::patch('/upload/{reservasi_id}', [User\PembayaranController::class, 'upload'])->name('upload');
+    });
 });
 
-// ==================== ROUTE UNTUK ADMIN (TANPA MIDDLEWARE 'admin') ====================
+// ==================== ROUTE UNTUK ADMIN ====================
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     
-    // Dashboard Admin dengan pengecekan role langsung di controller
     Route::get('/dashboard', [Admin\DashboardController::class, 'index'])->name('dashboard');
     
-    // CRUD Type Kamar
     Route::resource('type-kamar', Admin\TypeKamarController::class);
-    
-    // CRUD Kamar
     Route::resource('kamar', Admin\KamarController::class);
     
-    // Reservasi Admin
     Route::prefix('reservasi')->name('reservasi.')->group(function () {
         Route::get('/', [Admin\ReservasiController::class, 'index'])->name('index');
         Route::get('/{id}', [Admin\ReservasiController::class, 'show'])->name('show');
@@ -52,10 +51,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::patch('/{id}/verify-payment', [Admin\ReservasiController::class, 'verifyPayment'])->name('verify-payment');
     });
     
-    // Pembayaran Admin
     Route::prefix('pembayaran')->name('pembayaran.')->group(function () {
         Route::get('/', [Admin\PembayaranController::class, 'index'])->name('index');
         Route::patch('/{id}/verify', [Admin\PembayaranController::class, 'verify'])->name('verify');
+        Route::patch('/{id}/reject', [Admin\PembayaranController::class, 'reject'])->name('reject');
     });
 });
 

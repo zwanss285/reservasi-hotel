@@ -14,7 +14,7 @@ class ReservasiController extends Controller
     public function index()
     {
         $reservasis = Reservasi::with(['kamar.typeKamar'])
-            ->where('user_id', auth()->id())
+            ->where('user_id', auth()->guard()->check() ? auth()->guard()->id() : null)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -55,12 +55,12 @@ class ReservasiController extends Controller
         $kode_booking = 'BOOK-' . strtoupper(Str::random(8));
         
         $reservasi = Reservasi::create([
-            'user_id' => auth()->id(),
+            'user_id' => auth()->guard()->user() ? auth()->guard()->user()->id : null,
             'kamar_id' => $request->kamar_id,
             'kode_booking' => $kode_booking,
             'nama_tamu' => $request->nama_tamu,
             'no_telepon' => $request->no_telepon,
-            'email' => auth()->user()->email,
+            'email' => auth()->guard()->user() ? auth()->guard()->user()->email : null,
             'jumlah_tamu' => $request->jumlah_tamu,
             'tanggal_check_in' => $request->tanggal_check_in,
             'tanggal_check_out' => $request->tanggal_check_out,
@@ -87,7 +87,7 @@ class ReservasiController extends Controller
     public function show($id)
     {
         $reservasi = Reservasi::with(['kamar.typeKamar', 'pembayaran'])
-            ->where('user_id', auth()->id())
+            ->where('user_id', auth()->guard()->check() ? auth()->guard()->id() : null)
             ->findOrFail($id);
         
         return view('user.reservasi.show', compact('reservasi'));
@@ -95,7 +95,7 @@ class ReservasiController extends Controller
 
     public function cancel($id)
     {
-        $reservasi = Reservasi::where('user_id', auth()->id())
+        $reservasi = Reservasi::where('user_id', auth()->guard()->check() ? auth()->guard()->id() : null)
             ->whereIn('status', ['pending', 'confirmed'])
             ->findOrFail($id);
         
